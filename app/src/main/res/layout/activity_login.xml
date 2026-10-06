@@ -62,19 +62,33 @@
             android:textSize="13sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/passwordInput"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/search_background"
-            android:hint="Enter your password"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:singleLine="true"
-            android:textSize="15sp"
-            android:inputType="textPassword" />
+            android:layout_marginTop="8dp">
 
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/search_background"
+                android:hint="Enter your password"
+                android:paddingStart="18dp"
+                android:paddingEnd="52dp"
+                android:singleLine="true"
+                android:textSize="15sp"
+                android:inputType="textPassword" />
+
+            <ImageButton
+                android:id="@+id/passwordToggle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Toggle password"
+                android:padding="12dp"
+                android:src="@drawable/ic_eye" />
+        </FrameLayout>
         <!-- Forgot Password -->
         <TextView
             android:id="@+id/forgotPassword"
