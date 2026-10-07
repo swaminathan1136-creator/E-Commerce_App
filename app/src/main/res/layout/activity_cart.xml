@@ -5,7 +5,7 @@
     android:background="#F5F5F5"
     android:orientation="vertical">
 
-    <!-- Custom Toolbar only -->
+    <!-- Custom Toolbar -->
     <include layout="@layout/custom_toolbar" />
 
     <ScrollView
@@ -20,7 +20,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Cart Item 1 -->
+            <!-- Cart Item 1 - Pizza -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,46 +65,46 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/quantity_background"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
-                    <Button
+                    <TextView
                         android:id="@+id/pizzaMinusButton"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:backgroundTint="#EEEEEE"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
                         android:text="−"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp" />
+                        android:textColor="#FF6B00"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/pizzaQuantityText"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="34dp"
                         android:gravity="center"
                         android:text="1"
                         android:textColor="#1A1A1A"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/pizzaPlusButton"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:backgroundTint="#EEEEEE"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
                         android:text="+"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp" />
+                        android:textColor="#FF6B00"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Cart Item 2 -->
+            <!-- Cart Item 2 - Biryani -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,42 +150,42 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/quantity_background"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
-                    <Button
+                    <TextView
                         android:id="@+id/biryaniMinusButton"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:backgroundTint="#EEEEEE"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
                         android:text="−"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp" />
+                        android:textColor="#FF6B00"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/biryaniQuantityText"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="34dp"
                         android:gravity="center"
                         android:text="1"
                         android:textColor="#1A1A1A"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/biryaniPlusButton"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:backgroundTint="#EEEEEE"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
                         android:text="+"
-                        android:textColor="#1A1A1A"
-                        android:textSize="18sp" />
+                        android:textColor="#FF6B00"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -291,19 +291,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="8dp"
-        android:padding="16dp">
+        android:elevation="10dp"
+        android:paddingStart="20dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="16dp">
 
         <Button
             android:id="@+id/placeOrderButton"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:backgroundTint="#FF6B00"
+            android:layout_height="50dp"
+            android:background="@drawable/forgot_password_btn_primary_bg"
             android:text="Place Order"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null" />
     </LinearLayout>
-
 </LinearLayout>

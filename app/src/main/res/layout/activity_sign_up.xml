@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Custom Toolbar (fixed at top) -->
+    <!-- Custom Toolbar -->
     <include layout="@layout/custom_toolbar" />
 
     <ScrollView
@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="32dp"
                 android:text="Full Name"
                 android:textColor="#424242"
                 android:textSize="13sp"
@@ -64,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="18dp"
                 android:text="Email or Mobile"
                 android:textColor="#424242"
                 android:textSize="13sp"
@@ -87,24 +87,77 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="18dp"
                 android:text="Password"
                 android:textColor="#424242"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/passwordInput"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/search_background"
-                android:hint="Create a password"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:singleLine="true"
-                android:textSize="15sp"
-                android:inputType="textPassword" />
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/passwordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search_background"
+                    android:hint="Create a password"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="52dp"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:inputType="textPassword" />
+
+                <ImageButton
+                    android:id="@+id/passwordToggle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Toggle password"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_eye_off" />
+            </FrameLayout>
+
+            <!-- Confirm Password -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Confirm Password"
+                android:textColor="#424242"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp">
+
+                <EditText
+                    android:id="@+id/confirmPasswordInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/search_background"
+                    android:hint="Confirm your password"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="52dp"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:inputType="textPassword" />
+
+                <ImageButton
+                    android:id="@+id/confirmPasswordToggle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Toggle confirm password"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_eye_off" />
+            </FrameLayout>
 
             <!-- Create Account Button -->
             <Button
@@ -112,12 +165,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#FF6B00"
+                android:background="@drawable/forgot_password_btn_primary_bg"
                 android:text="Create Account"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
 
             <!-- Already have account -->
             <TextView
@@ -135,7 +189,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="28dp"
                 android:gravity="center"
                 android:text="By signing up, you agree to our Terms &amp; Privacy Policy"
                 android:textColor="#9E9E9E"

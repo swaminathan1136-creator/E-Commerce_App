@@ -39,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
             toolbarTitle.setText("My Cart");
         }
 
+        // Place Order Button
         Button placeOrderButton = findViewById(R.id.placeOrderButton);
         if (placeOrderButton != null) {
             placeOrderButton.setOnClickListener(v ->
@@ -46,17 +47,19 @@ public class CartActivity extends AppCompatActivity {
             );
         }
 
-        Button pizzaMinusButton = findViewById(R.id.pizzaMinusButton);
-        Button pizzaPlusButton = findViewById(R.id.pizzaPlusButton);
+        // Quantity Views
+        TextView pizzaMinusButton = findViewById(R.id.pizzaMinusButton);
+        TextView pizzaPlusButton = findViewById(R.id.pizzaPlusButton);
         pizzaQuantityText = findViewById(R.id.pizzaQuantityText);
 
-        Button biryaniMinusButton = findViewById(R.id.biryaniMinusButton);
-        Button biryaniPlusButton = findViewById(R.id.biryaniPlusButton);
+        TextView biryaniMinusButton = findViewById(R.id.biryaniMinusButton);
+        TextView biryaniPlusButton = findViewById(R.id.biryaniPlusButton);
         biryaniQuantityText = findViewById(R.id.biryaniQuantityText);
 
         itemTotalText = findViewById(R.id.itemTotalText);
         totalText = findViewById(R.id.totalText);
 
+        // Pizza Quantity
         pizzaPlusButton.setOnClickListener(v -> {
             pizzaQuantity++;
             updateCart();
@@ -69,6 +72,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        // Biryani Quantity
         biryaniPlusButton.setOnClickListener(v -> {
             biryaniQuantity++;
             updateCart();

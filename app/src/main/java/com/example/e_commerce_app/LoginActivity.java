@@ -3,9 +3,9 @@ package com.example.e_commerce_app;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,11 +23,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Back button
         ImageButton backButton = findViewById(R.id.backButton);
         if (backButton != null) {
             backButton.setOnClickListener(v -> finish());
         }
 
+        // Toolbar title
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         if (toolbarTitle != null) {
             toolbarTitle.setText("Login");
@@ -40,18 +42,22 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
         Button signUpButton = findViewById(R.id.signUpButton);
 
-        // ===== Eye icon – show / hide password (font stays same) =====
+        // ===== Eye icon – show / hide password =====
         if (passwordToggle != null && passwordInput != null) {
+
+            // Initial state: password is hidden
+            passwordToggle.setImageResource(R.drawable.ic_eye_off);
+
             passwordToggle.setOnClickListener(v -> {
                 if (isPasswordVisible) {
                     // Hide password
                     passwordInput.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    passwordToggle.setImageResource(R.drawable.ic_eye);
+                    passwordToggle.setImageResource(R.drawable.ic_eye_off);
                     isPasswordVisible = false;
                 } else {
                     // Show password
                     passwordInput.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    passwordToggle.setImageResource(R.drawable.ic_eye_off);
+                    passwordToggle.setImageResource(R.drawable.ic_eye);
                     isPasswordVisible = true;
                 }
                 // Keep cursor at the end
@@ -62,27 +68,46 @@ public class LoginActivity extends AppCompatActivity {
         // ===== Forgot Password =====
         if (forgotPassword != null) {
             forgotPassword.setOnClickListener(v -> {
-                EditText resetEmail = new EditText(this);
-                resetEmail.setHint("Enter your email");
-                resetEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                resetEmail.setPadding(40, 30, 40, 30);
+                try {
+                    View dialogView = getLayoutInflater().inflate(R.layout.forgot_password, null);
 
-                new AlertDialog.Builder(this)
-                        .setTitle("Forgot Password")
-                        .setMessage("Enter your email to receive a reset link")
-                        .setView(resetEmail)
-                        .setPositiveButton("Send Link", (dialog, which) -> {
-                            String email = resetEmail.getText().toString().trim();
+                    EditText resetEmailInput = dialogView.findViewById(R.id.resetEmailInput);
+                    Button btnCancelReset = dialogView.findViewById(R.id.btnCancelReset);
+                    Button btnSendReset = dialogView.findViewById(R.id.btnSendReset);
+
+                    AlertDialog dialog = new AlertDialog.Builder(this)
+                            .setView(dialogView)
+                            .setCancelable(true)
+                            .create();
+
+                    if (dialog.getWindow() != null) {
+                        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    }
+
+                    if (btnCancelReset != null) {
+                        btnCancelReset.setOnClickListener(view -> dialog.dismiss());
+                    }
+
+                    if (btnSendReset != null) {
+                        btnSendReset.setOnClickListener(view -> {
+                            String email = resetEmailInput != null ? resetEmailInput.getText().toString().trim() : "";
                             if (email.isEmpty()) {
                                 Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(this,
                                         "Password reset link sent to " + email,
                                         Toast.LENGTH_LONG).show();
+                                dialog.dismiss();
                             }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
+                        });
+                    }
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
             });
         }
 

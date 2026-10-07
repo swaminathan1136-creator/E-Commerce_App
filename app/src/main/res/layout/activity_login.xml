@@ -89,6 +89,7 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_eye" />
         </FrameLayout>
+
         <!-- Forgot Password -->
         <TextView
             android:id="@+id/forgotPassword"
@@ -107,12 +108,13 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="28dp"
-            android:backgroundTint="#FF6B00"
+            android:background="@drawable/forgot_password_btn_primary_bg"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:stateListAnimator="@null" />
 
         <!-- Divider -->
         <LinearLayout
@@ -150,12 +152,13 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/forgot_password_btn_cancel_bg"
             android:text="Create New Account"
             android:textAllCaps="false"
             android:textColor="#FF6B00"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:stateListAnimator="@null" />
 
         <!-- Bottom Text -->
         <TextView
