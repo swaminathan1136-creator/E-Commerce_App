@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Theme with Orange primary color -->
+    <style name="Theme.ECommerceApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color (orange) -->
+        <item name="colorPrimary">#FF6B00</item>
+        <item name="colorPrimaryDark">#E65C00</item>
+        <item name="colorPrimaryVariant">#FF6B00</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
 
-    <style name="Theme.ECommerce_App"
-        parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Secondary -->
+        <item name="colorSecondary">#FF6B00</item>
+        <item name="colorSecondaryVariant">#E65C00</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
 
-        <item name="android:fontFamily">sans</item>
-        <item name="android:windowActionModeOverlay">true</item>
-        <item name="android:colorAccent">@android:color/black</item>
+        <!-- Status bar -->
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
 
+        <!-- Background -->
+        <item name="android:windowBackground">#FFFFFF</item>
     </style>
-
 </resources>

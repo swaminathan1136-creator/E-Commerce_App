@@ -1,4 +1,4 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.e_commerce_app.CartActivity;
+import com.example.e_commerce_app.CategoryActivity;
+import com.example.e_commerce_app.FilterResultsActivity;
+import com.example.e_commerce_app.ProductDetailActivity;
+import com.example.e_commerce_app.R;
+import com.example.e_commerce_app.RestaurantsActivity;
+import com.example.e_commerce_app.SearchActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class HomeFragment extends Fragment {
@@ -32,6 +39,33 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // ==================== TOOLBAR SETUP (Home) ====================
+        View locationContainer = view.findViewById(R.id.locationContainer);
+        TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
+        TextView deliveryAddress = view.findViewById(R.id.deliveryAddress);
+        View cartContainer = view.findViewById(R.id.cartContainer);
+
+        if (locationContainer != null) {
+            locationContainer.setVisibility(View.VISIBLE);
+        }
+        if (cartContainer != null) {
+            cartContainer.setVisibility(View.VISIBLE);
+        }
+        if (toolbarTitle != null) {
+            toolbarTitle.setVisibility(View.GONE);
+        }
+
+        if (locationContainer != null) {
+            locationContainer.setOnClickListener(v -> showLocationBottomSheet(deliveryAddress));
+        }
+
+        if (cartContainer != null) {
+            cartContainer.setOnClickListener(v ->
+                    startActivity(new Intent(requireContext(), CartActivity.class))
+            );
+        }
+
+        // ==================== OTHER VIEWS ====================
         Button orderNowButton = view.findViewById(R.id.orderNowButton);
         Button restaurantsButton = view.findViewById(R.id.restaurantsButton);
         FrameLayout filterButton = view.findViewById(R.id.filterButton);
@@ -44,20 +78,6 @@ public class HomeFragment extends Fragment {
         ImageView product1 = view.findViewById(R.id.product1);
         ImageView product2 = view.findViewById(R.id.product2);
 
-        View cartClickArea = view.findViewById(R.id.cartContainer);
-        if (cartClickArea == null) {
-            cartClickArea = view.findViewById(R.id.cartIcon);
-        }
-
-        // ==================== LOCATION CLICK ====================
-        View locationContainer = view.findViewById(R.id.locationContainer);
-        TextView deliveryAddress = view.findViewById(R.id.deliveryAddress);
-
-        if (locationContainer != null) {
-            locationContainer.setOnClickListener(v -> showLocationBottomSheet(deliveryAddress));
-        }
-
-        // Search Bar
         if (searchBar != null) {
             searchBar.setFocusable(false);
             searchBar.setClickable(true);
@@ -66,38 +86,26 @@ public class HomeFragment extends Fragment {
             );
         }
 
-        // Order Now
         if (orderNowButton != null) {
             orderNowButton.setOnClickListener(v ->
                     startActivity(new Intent(requireContext(), RestaurantsActivity.class))
             );
         }
 
-        // View All Restaurants
         if (restaurantsButton != null) {
             restaurantsButton.setOnClickListener(v ->
                     startActivity(new Intent(requireContext(), RestaurantsActivity.class))
             );
         }
 
-        // Filter Button
         if (filterButton != null) {
             filterButton.setOnClickListener(v -> showFilterBottomSheet());
         }
 
-        // Cart
-        if (cartClickArea != null) {
-            cartClickArea.setOnClickListener(v ->
-                    startActivity(new Intent(requireContext(), CartActivity.class))
-            );
-        }
-
-        // Categories
         if (pizzaCategory != null) pizzaCategory.setOnClickListener(v -> openCategory("Pizza"));
         if (burgersCategory != null) burgersCategory.setOnClickListener(v -> openCategory("Burgers"));
         if (biryaniCategory != null) biryaniCategory.setOnClickListener(v -> openCategory("Biryani"));
 
-        // Food cards
         if (product1 != null) {
             product1.setOnClickListener(v -> openProduct(
                     "Margherita Pizza",
@@ -117,7 +125,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    // ==================== LOCATION BOTTOM SHEET ====================
     private void showLocationBottomSheet(TextView deliveryAddress) {
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_location, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
@@ -162,7 +169,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    // ==================== FILTER BOTTOM SHEET ====================
     private void showFilterBottomSheet() {
         try {
             View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null);
@@ -184,7 +190,10 @@ public class HomeFragment extends Fragment {
             Button btnApply = bottomSheetView.findViewById(R.id.btnApply);
 
             if (btnClearAll == null || btnApply == null) {
-                Toast.makeText(requireContext(), "Filter layout error", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(),
+                        "Filter layout missing IDs – check bottom_sheet_filter.xml",
+                        Toast.LENGTH_LONG).show();
+                bottomSheetDialog.dismiss();
                 return;
             }
 
@@ -217,41 +226,53 @@ public class HomeFragment extends Fragment {
                 if (chipRelevance != null) chipRelevance.setTextColor(0xFFFF6B00);
                 if (chipRating != null) chipRating.setTextColor(0xFF333333);
                 if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
-
                 if (chipRating4 != null) chipRating4.setTextColor(0xFF333333);
                 if (chipFastDelivery != null) chipFastDelivery.setTextColor(0xFF333333);
                 if (chipOffers != null) chipOffers.setTextColor(0xFF333333);
                 if (chipPureVeg != null) chipPureVeg.setTextColor(0xFF333333);
-
                 Toast.makeText(requireContext(), "Filters cleared", Toast.LENGTH_SHORT).show();
             });
 
             btnApply.setOnClickListener(v -> {
-                StringBuilder selected = new StringBuilder();
+                try {
+                    boolean rating4Plus = chipRating4 != null
+                            && chipRating4.getCurrentTextColor() == 0xFFFF6B00;
+                    boolean fastDelivery = chipFastDelivery != null
+                            && chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00;
+                    boolean offers = chipOffers != null
+                            && chipOffers.getCurrentTextColor() == 0xFFFF6B00;
+                    boolean pureVeg = chipPureVeg != null
+                            && chipPureVeg.getCurrentTextColor() == 0xFFFF6B00;
 
-                if (chipRating != null && chipRating.getCurrentTextColor() == 0xFFFF6B00) {
-                    selected.append("Rating");
-                } else if (chipDeliveryTime != null && chipDeliveryTime.getCurrentTextColor() == 0xFFFF6B00) {
-                    selected.append("Delivery Time");
-                } else {
-                    selected.append("Relevance");
+                    String sortBy = "Relevance";
+                    if (chipRating != null && chipRating.getCurrentTextColor() == 0xFFFF6B00) {
+                        sortBy = "Rating";
+                    } else if (chipDeliveryTime != null
+                            && chipDeliveryTime.getCurrentTextColor() == 0xFFFF6B00) {
+                        sortBy = "Delivery Time";
+                    }
+
+                    Intent intent = new Intent(requireContext(), FilterResultsActivity.class);
+                    intent.putExtra("rating4Plus", rating4Plus);
+                    intent.putExtra("fastDelivery", fastDelivery);
+                    intent.putExtra("offers", offers);
+                    intent.putExtra("pureVeg", pureVeg);
+                    intent.putExtra("sortBy", sortBy);
+                    startActivity(intent);
+
+                    bottomSheetDialog.dismiss();
+                } catch (Exception ex) {
+                    Toast.makeText(requireContext(),
+                            "Cannot open results: " + ex.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                    bottomSheetDialog.dismiss();
                 }
-
-                if (chipRating4 != null && chipRating4.getCurrentTextColor() == 0xFFFF6B00)
-                    selected.append(", Rating 4.0+");
-                if (chipFastDelivery != null && chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00)
-                    selected.append(", Fast Delivery");
-                if (chipOffers != null && chipOffers.getCurrentTextColor() == 0xFFFF6B00)
-                    selected.append(", Offers");
-                if (chipPureVeg != null && chipPureVeg.getCurrentTextColor() == 0xFFFF6B00)
-                    selected.append(", Pure Veg");
-
-                Toast.makeText(requireContext(), "Applied: " + selected, Toast.LENGTH_LONG).show();
-                bottomSheetDialog.dismiss();
             });
 
         } catch (Exception e) {
-            Toast.makeText(requireContext(), "Filter Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(),
+                    "Filter Error: " + e.getMessage(),
+                    Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }

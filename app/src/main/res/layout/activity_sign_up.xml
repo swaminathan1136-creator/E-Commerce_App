@@ -1,200 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:background="#FFFFFF">
 
-    <!-- Custom Toolbar -->
-    <include layout="@layout/custom_toolbar" />
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="28dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="28dp">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <!-- Title -->
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Back"
+                android:padding="8dp"
+                android:src="@drawable/ic_back" />
+
             <TextView
+                android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Account"
+                android:layout_marginStart="4dp"
+                android:text="Sign Up"
                 android:textColor="#1A1A1A"
-                android:textSize="32sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Join Foodie and start ordering your favorite food"
-                android:textColor="#757575"
-                android:textSize="15sp" />
-
-            <!-- Full Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Full Name"
-                android:textColor="#424242"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/nameInput"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/search_background"
-                android:hint="Enter your full name"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:singleLine="true"
-                android:textSize="15sp"
-                android:inputType="textPersonName" />
-
-            <!-- Email -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Email or Mobile"
-                android:textColor="#424242"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/emailInput"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/search_background"
-                android:hint="Enter your email or mobile number"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:singleLine="true"
-                android:textSize="15sp"
-                android:inputType="textEmailAddress" />
-
-            <!-- Password -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Password"
-                android:textColor="#424242"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="8dp">
-
-                <EditText
-                    android:id="@+id/passwordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/search_background"
-                    android:hint="Create a password"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="52dp"
-                    android:singleLine="true"
-                    android:textSize="15sp"
-                    android:inputType="textPassword" />
-
-                <ImageButton
-                    android:id="@+id/passwordToggle"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Toggle password"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_eye_off" />
-            </FrameLayout>
-
-            <!-- Confirm Password -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Confirm Password"
-                android:textColor="#424242"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="8dp">
-
-                <EditText
-                    android:id="@+id/confirmPasswordInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/search_background"
-                    android:hint="Confirm your password"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="52dp"
-                    android:singleLine="true"
-                    android:textSize="15sp"
-                    android:inputType="textPassword" />
-
-                <ImageButton
-                    android:id="@+id/confirmPasswordToggle"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Toggle confirm password"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_eye_off" />
-            </FrameLayout>
-
-            <!-- Create Account Button -->
-            <Button
-                android:id="@+id/createAccountButton"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/forgot_password_btn_primary_bg"
-                android:text="Create Account"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:stateListAnimator="@null" />
-
-            <!-- Already have account -->
-            <TextView
-                android:id="@+id/loginText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:text="Already have an account? Login"
-                android:textColor="#FF6B00"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <!-- Terms -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:gravity="center"
-                android:text="By signing up, you agree to our Terms &amp; Privacy Policy"
-                android:textColor="#9E9E9E"
-                android:textSize="12sp" />
-
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Create Account"
+            android:textColor="#1A1A1A"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Join Foodie and start ordering your favorite food"
+            android:textColor="#888888"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="Full Name"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/search_background"
+            android:hint="Enter your full name"
+            android:inputType="textPersonName"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#AAAAAA"
+            android:textSize="15sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email or Mobile"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/search_background"
+            android:hint="Enter your email or mobile number"
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#AAAAAA"
+            android:textSize="15sp"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Password"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/search_background"
+                android:hint="Create a password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#1A1A1A"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp"
+                android:singleLine="true" />
+
+            <ImageButton
+                android:id="@+id/passwordToggle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Show password"
+                android:padding="12dp"
+                android:src="@drawable/ic_eye_off" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Confirm Password"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/confirmPasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/search_background"
+                android:hint="Confirm your password"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#1A1A1A"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp"
+                android:singleLine="true" />
+
+            <ImageButton
+                android:id="@+id/confirmPasswordToggle"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="end|center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Show password"
+                android:padding="12dp"
+                android:src="@drawable/ic_eye_off" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/createAccountButton"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#FF6B00"
+            android:text="Create Account"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Already have an account? Login"
+            android:textColor="#FF6B00"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="By signing up, you agree to our Terms &amp; Privacy Policy"
+            android:textColor="#AAAAAA"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>

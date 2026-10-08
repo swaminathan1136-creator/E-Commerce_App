@@ -5,6 +5,11 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.e_commerce_app.fragment.FavoritesFragment;
+import com.example.e_commerce_app.fragment.HomeFragment;
+import com.example.e_commerce_app.fragment.OffersFragment;
+import com.example.e_commerce_app.fragment.OrdersFragment;
+import com.example.e_commerce_app.fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        // Load Home by default
+        // Load HomeFragment by default
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }
@@ -24,17 +29,21 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
-            int id = item.getItemId();
+            int itemId = item.getItemId();
 
-            if (id == R.id.navHome) {
+            if (itemId == R.id.navHome) {
                 selectedFragment = new HomeFragment();
-            } else if (id == R.id.navOffers) {
-                selectedFragment = new OffersFragment();
-            } else if (id == R.id.navFavorites) {
-                selectedFragment = new FavoritesFragment();
-            } else if (id == R.id.navOrders) {
+            }
+            else if (itemId == R.id.navOrders) {
                 selectedFragment = new OrdersFragment();
-            } else if (id == R.id.navProfile) {
+            }
+            else if (itemId == R.id.navFavorites) {
+                selectedFragment = new FavoritesFragment();
+            }
+            else if (itemId == R.id.navOffers) {
+                selectedFragment = new OffersFragment();
+            }
+            else if (itemId == R.id.navProfile) {
                 selectedFragment = new ProfileFragment();
             }
 
@@ -42,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(selectedFragment);
                 return true;
             }
+
             return false;
         });
     }

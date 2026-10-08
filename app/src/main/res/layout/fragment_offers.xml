@@ -5,8 +5,8 @@
     android:background="#F5F5F5"
     android:orientation="vertical">
 
-    <!-- Custom Toolbar only -->
-    <include layout="@layout/custom_toolbar" />
+    <!-- ==================== LOCATION + CART TOOLBAR ==================== -->
+    <include layout="@layout/home_toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -27,19 +27,16 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        // Back button
         ImageButton backButton = findViewById(R.id.backButton);
         if (backButton != null) {
             backButton.setOnClickListener(v -> finish());
         }
 
-        // Toolbar title
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         if (toolbarTitle != null) {
             toolbarTitle.setText("My Cart");
         }
 
-        // Place Order Button
         Button placeOrderButton = findViewById(R.id.placeOrderButton);
         if (placeOrderButton != null) {
             placeOrderButton.setOnClickListener(v ->
@@ -47,7 +44,6 @@ public class CartActivity extends AppCompatActivity {
             );
         }
 
-        // Quantity Views
         TextView pizzaMinusButton = findViewById(R.id.pizzaMinusButton);
         TextView pizzaPlusButton = findViewById(R.id.pizzaPlusButton);
         pizzaQuantityText = findViewById(R.id.pizzaQuantityText);
@@ -59,43 +55,57 @@ public class CartActivity extends AppCompatActivity {
         itemTotalText = findViewById(R.id.itemTotalText);
         totalText = findViewById(R.id.totalText);
 
-        // Pizza Quantity
-        pizzaPlusButton.setOnClickListener(v -> {
-            pizzaQuantity++;
-            updateCart();
-        });
-
-        pizzaMinusButton.setOnClickListener(v -> {
-            if (pizzaQuantity > 1) {
-                pizzaQuantity--;
+        if (pizzaPlusButton != null) {
+            pizzaPlusButton.setOnClickListener(v -> {
+                pizzaQuantity++;
                 updateCart();
-            }
-        });
+            });
+        }
 
-        // Biryani Quantity
-        biryaniPlusButton.setOnClickListener(v -> {
-            biryaniQuantity++;
-            updateCart();
-        });
+        if (pizzaMinusButton != null) {
+            pizzaMinusButton.setOnClickListener(v -> {
+                if (pizzaQuantity > 1) {
+                    pizzaQuantity--;
+                    updateCart();
+                }
+            });
+        }
 
-        biryaniMinusButton.setOnClickListener(v -> {
-            if (biryaniQuantity > 1) {
-                biryaniQuantity--;
+        if (biryaniPlusButton != null) {
+            biryaniPlusButton.setOnClickListener(v -> {
+                biryaniQuantity++;
                 updateCart();
-            }
-        });
+            });
+        }
+
+        if (biryaniMinusButton != null) {
+            biryaniMinusButton.setOnClickListener(v -> {
+                if (biryaniQuantity > 1) {
+                    biryaniQuantity--;
+                    updateCart();
+                }
+            });
+        }
 
         updateCart();
     }
 
     private void updateCart() {
-        pizzaQuantityText.setText(String.valueOf(pizzaQuantity));
-        biryaniQuantityText.setText(String.valueOf(biryaniQuantity));
+        if (pizzaQuantityText != null) {
+            pizzaQuantityText.setText(String.valueOf(pizzaQuantity));
+        }
+        if (biryaniQuantityText != null) {
+            biryaniQuantityText.setText(String.valueOf(biryaniQuantity));
+        }
 
         int itemTotal = (pizzaPrice * pizzaQuantity) + (biryaniPrice * biryaniQuantity);
         int total = itemTotal + deliveryFee;
 
-        itemTotalText.setText("₹" + itemTotal);
-        totalText.setText("₹" + total);
+        if (itemTotalText != null) {
+            itemTotalText.setText("₹" + itemTotal);
+        }
+        if (totalText != null) {
+            totalText.setText("₹" + total);
+        }
     }
 }

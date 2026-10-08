@@ -11,60 +11,59 @@
         android:orientation="vertical"
         android:padding="28dp">
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="40dp"
             android:text="Welcome back"
             android:textColor="#1A1A1A"
-            android:textSize="32sp"
+            android:textSize="28sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:text="Login to continue ordering your favorite food"
-            android:textColor="#757575"
-            android:textSize="15sp" />
+            android:textColor="#888888"
+            android:textSize="14sp" />
 
-        <!-- Email -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="32dp"
             android:text="Email or Mobile"
-            android:textColor="#424242"
-            android:textSize="13sp"
+            android:textColor="#333333"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/emailInput"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/search_background"
             android:hint="Enter your email or mobile number"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#AAAAAA"
             android:textSize="15sp"
-            android:inputType="textEmailAddress" />
+            android:singleLine="true" />
 
-        <!-- Password -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:text="Password"
-            android:textColor="#424242"
-            android:textSize="13sp"
+            android:textColor="#333333"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:layout_marginTop="8dp">
 
             <EditText
@@ -73,11 +72,13 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/search_background"
                 android:hint="Enter your password"
-                android:paddingStart="18dp"
-                android:paddingEnd="52dp"
-                android:singleLine="true"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#1A1A1A"
+                android:textColorHint="#AAAAAA"
                 android:textSize="15sp"
-                android:inputType="textPassword" />
+                android:singleLine="true" />
 
             <ImageButton
                 android:id="@+id/passwordToggle"
@@ -85,12 +86,11 @@
                 android:layout_height="48dp"
                 android:layout_gravity="end|center_vertical"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Toggle password"
+                android:contentDescription="Show password"
                 android:padding="12dp"
-                android:src="@drawable/ic_eye" />
+                android:src="@drawable/ic_eye_off" />
         </FrameLayout>
 
-        <!-- Forgot Password -->
         <TextView
             android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
@@ -99,28 +99,25 @@
             android:layout_marginTop="12dp"
             android:text="Forgot Password?"
             android:textColor="#FF6B00"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
-        <!-- Login Button -->
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/forgot_password_btn_primary_bg"
+            android:layout_height="54dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#FF6B00"
             android:text="Login"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:stateListAnimator="@null" />
+            android:textStyle="bold" />
 
-        <!-- Divider -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -133,10 +130,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:text="or"
-                android:textColor="#9E9E9E"
+                android:textColor="#AAAAAA"
                 android:textSize="13sp" />
 
             <View
@@ -146,28 +143,25 @@
                 android:background="#E0E0E0" />
         </LinearLayout>
 
-        <!-- Create Account Button -->
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/forgot_password_btn_cancel_bg"
+            android:layout_height="54dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FF6B00"
             android:text="Create New Account"
             android:textAllCaps="false"
-            android:textColor="#FF6B00"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:stateListAnimator="@null" />
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-        <!-- Bottom Text -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="By continuing, you agree to our Terms &amp; Privacy Policy"
-            android:textColor="#9E9E9E"
+            android:textColor="#AAAAAA"
             android:textSize="12sp" />
 
     </LinearLayout>
