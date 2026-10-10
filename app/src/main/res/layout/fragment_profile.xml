@@ -252,33 +252,6 @@
                         android:textSize="22sp" />
                 </LinearLayout>
 
-                <!-- Coupons -->
-                <LinearLayout
-                    android:id="@+id/couponsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="My Coupons"
-                        android:textColor="#1A1A1A"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="›"
-                        android:textColor="#BDBDBD"
-                        android:textSize="22sp" />
-                </LinearLayout>
-
                 <!-- Help -->
                 <LinearLayout
                     android:id="@+id/helpButton"
@@ -304,6 +277,31 @@
                         android:text="›"
                         android:textColor="#BDBDBD"
                         android:textSize="22sp" />
+                </LinearLayout>
+
+                <!-- Dark Mode -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingTop="14dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="14dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Dark Mode"
+                        android:textColor="#1A1A1A"
+                        android:textSize="16sp" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/darkModeSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <!-- Logout -->

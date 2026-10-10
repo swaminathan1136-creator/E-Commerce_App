@@ -28,6 +28,7 @@
         <activity android:name=".CartActivity" android:exported="false" />
         <activity android:name=".CategoryActivity" android:exported="false" />
         <activity android:name=".FavoritesActivity" android:exported="false" />
+        <activity android:name=".OrderHistoryActivity"  android:exported="false" />
 
         <!-- Needed for filter button -->
         <activity android:name=".FilterResultsActivity" android:exported="false" />

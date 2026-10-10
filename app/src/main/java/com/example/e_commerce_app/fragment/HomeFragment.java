@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.e_commerce_app.CartActivity;
+import com.example.e_commerce_app.CartManager;
 import com.example.e_commerce_app.CategoryActivity;
 import com.example.e_commerce_app.FilterResultsActivity;
 import com.example.e_commerce_app.ProductDetailActivity;
@@ -27,6 +28,8 @@ import com.example.e_commerce_app.SearchActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class HomeFragment extends Fragment {
+
+    private TextView cartBadge;
 
     @Nullable
     @Override
@@ -44,6 +47,7 @@ public class HomeFragment extends Fragment {
         TextView toolbarTitle = view.findViewById(R.id.toolbarTitle);
         TextView deliveryAddress = view.findViewById(R.id.deliveryAddress);
         View cartContainer = view.findViewById(R.id.cartContainer);
+        cartBadge = view.findViewById(R.id.cartBadge);
 
         if (locationContainer != null) {
             locationContainer.setVisibility(View.VISIBLE);
@@ -54,6 +58,9 @@ public class HomeFragment extends Fragment {
         if (toolbarTitle != null) {
             toolbarTitle.setVisibility(View.GONE);
         }
+
+        // Update cart badge
+        updateCartBadge();
 
         if (locationContainer != null) {
             locationContainer.setOnClickListener(v -> showLocationBottomSheet(deliveryAddress));
@@ -125,6 +132,24 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateCartBadge();
+    }
+
+    private void updateCartBadge() {
+        if (cartBadge != null) {
+            int count = CartManager.getInstance().getTotalItems();
+            if (count > 0) {
+                cartBadge.setVisibility(View.VISIBLE);
+                cartBadge.setText(String.valueOf(count));
+            } else {
+                cartBadge.setVisibility(View.GONE);
+            }
+        }
+    }
+
     private void showLocationBottomSheet(TextView deliveryAddress) {
         View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_location, null);
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
@@ -172,107 +197,143 @@ public class HomeFragment extends Fragment {
     private void showFilterBottomSheet() {
         try {
             View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null);
-
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireContext());
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
-            TextView chipRelevance = bottomSheetView.findViewById(R.id.chipRelevance);
-            TextView chipRating = bottomSheetView.findViewById(R.id.chipRating);
-            TextView chipDeliveryTime = bottomSheetView.findViewById(R.id.chipDeliveryTime);
+            // Sort By
+            final TextView chipRelevance = bottomSheetView.findViewById(R.id.chipRelevance);
+            final TextView chipRatingHigh = bottomSheetView.findViewById(R.id.chipRatingHigh);
+            final TextView chipRatingLow = bottomSheetView.findViewById(R.id.chipRatingLow);
+            final TextView chipRecent = bottomSheetView.findViewById(R.id.chipRecent);
+            final TextView chipDeliveryTime = bottomSheetView.findViewById(R.id.chipDeliveryTime);
 
-            TextView chipRating4 = bottomSheetView.findViewById(R.id.chipRating4);
-            TextView chipFastDelivery = bottomSheetView.findViewById(R.id.chipFastDelivery);
-            TextView chipOffers = bottomSheetView.findViewById(R.id.chipOffers);
-            TextView chipPureVeg = bottomSheetView.findViewById(R.id.chipPureVeg);
+            // Quick Filters
+            final TextView chipRating4 = bottomSheetView.findViewById(R.id.chipRating4);
+            final TextView chipFastDelivery = bottomSheetView.findViewById(R.id.chipFastDelivery);
+            final TextView chipOffers = bottomSheetView.findViewById(R.id.chipOffers);
+            final TextView chipPureVeg = bottomSheetView.findViewById(R.id.chipPureVeg);
 
             Button btnClearAll = bottomSheetView.findViewById(R.id.btnClearAll);
             Button btnApply = bottomSheetView.findViewById(R.id.btnApply);
 
             if (btnClearAll == null || btnApply == null) {
-                Toast.makeText(requireContext(),
-                        "Filter layout missing IDs – check bottom_sheet_filter.xml",
-                        Toast.LENGTH_LONG).show();
-                bottomSheetDialog.dismiss();
+                Toast.makeText(requireContext(), "Filter layout error", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            View.OnClickListener sortClickListener = v -> {
-                if (chipRelevance != null) chipRelevance.setTextColor(0xFF333333);
-                if (chipRating != null) chipRating.setTextColor(0xFF333333);
-                if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
-                ((TextView) v).setTextColor(0xFFFF6B00);
-            };
+            // ========== SORT BY ==========
+            View.OnClickListener sortListener = v -> {
+                TextView clicked = (TextView) v;
 
-            if (chipRelevance != null) chipRelevance.setOnClickListener(sortClickListener);
-            if (chipRating != null) chipRating.setOnClickListener(sortClickListener);
-            if (chipDeliveryTime != null) chipDeliveryTime.setOnClickListener(sortClickListener);
-
-            View.OnClickListener filterClickListener = v -> {
-                TextView tv = (TextView) v;
-                if (tv.getCurrentTextColor() == 0xFFFF6B00) {
-                    tv.setTextColor(0xFF333333);
-                } else {
-                    tv.setTextColor(0xFFFF6B00);
+                if (clicked.getCurrentTextColor() == 0xFFFF6B00) {
+                    clicked.setTextColor(0xFF333333);
+                    return;
                 }
+
+                if (chipRelevance != null) chipRelevance.setTextColor(0xFF333333);
+                if (chipRatingHigh != null) chipRatingHigh.setTextColor(0xFF333333);
+                if (chipRatingLow != null) chipRatingLow.setTextColor(0xFF333333);
+                if (chipRecent != null) chipRecent.setTextColor(0xFF333333);
+                if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
+
+                clicked.setTextColor(0xFFFF6B00);
             };
 
-            if (chipRating4 != null) chipRating4.setOnClickListener(filterClickListener);
-            if (chipFastDelivery != null) chipFastDelivery.setOnClickListener(filterClickListener);
-            if (chipOffers != null) chipOffers.setOnClickListener(filterClickListener);
-            if (chipPureVeg != null) chipPureVeg.setOnClickListener(filterClickListener);
+            if (chipRelevance != null) chipRelevance.setOnClickListener(sortListener);
+            if (chipRatingHigh != null) chipRatingHigh.setOnClickListener(sortListener);
+            if (chipRatingLow != null) chipRatingLow.setOnClickListener(sortListener);
+            if (chipRecent != null) chipRecent.setOnClickListener(sortListener);
+            if (chipDeliveryTime != null) chipDeliveryTime.setOnClickListener(sortListener);
 
+            // ========== QUICK FILTERS ==========
+            if (chipRating4 != null) {
+                chipRating4.setOnClickListener(v -> {
+                    if (chipRating4.getCurrentTextColor() == 0xFFFF6B00) {
+                        chipRating4.setTextColor(0xFF333333);
+                    } else {
+                        chipRating4.setTextColor(0xFFFF6B00);
+                    }
+                });
+            }
+
+            if (chipFastDelivery != null) {
+                chipFastDelivery.setOnClickListener(v -> {
+                    if (chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00) {
+                        chipFastDelivery.setTextColor(0xFF333333);
+                    } else {
+                        chipFastDelivery.setTextColor(0xFFFF6B00);
+                    }
+                });
+            }
+
+            if (chipOffers != null) {
+                chipOffers.setOnClickListener(v -> {
+                    if (chipOffers.getCurrentTextColor() == 0xFFFF6B00) {
+                        chipOffers.setTextColor(0xFF333333);
+                    } else {
+                        chipOffers.setTextColor(0xFFFF6B00);
+                    }
+                });
+            }
+
+            if (chipPureVeg != null) {
+                chipPureVeg.setOnClickListener(v -> {
+                    if (chipPureVeg.getCurrentTextColor() == 0xFFFF6B00) {
+                        chipPureVeg.setTextColor(0xFF333333);
+                    } else {
+                        chipPureVeg.setTextColor(0xFFFF6B00);
+                    }
+                });
+            }
+
+            // ========== CLEAR ALL ==========
             btnClearAll.setOnClickListener(v -> {
-                if (chipRelevance != null) chipRelevance.setTextColor(0xFFFF6B00);
-                if (chipRating != null) chipRating.setTextColor(0xFF333333);
+                if (chipRelevance != null) chipRelevance.setTextColor(0xFF333333);
+                if (chipRatingHigh != null) chipRatingHigh.setTextColor(0xFF333333);
+                if (chipRatingLow != null) chipRatingLow.setTextColor(0xFF333333);
+                if (chipRecent != null) chipRecent.setTextColor(0xFF333333);
                 if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
+
                 if (chipRating4 != null) chipRating4.setTextColor(0xFF333333);
                 if (chipFastDelivery != null) chipFastDelivery.setTextColor(0xFF333333);
                 if (chipOffers != null) chipOffers.setTextColor(0xFF333333);
                 if (chipPureVeg != null) chipPureVeg.setTextColor(0xFF333333);
+
                 Toast.makeText(requireContext(), "Filters cleared", Toast.LENGTH_SHORT).show();
             });
 
+            // ========== APPLY ==========
             btnApply.setOnClickListener(v -> {
-                try {
-                    boolean rating4Plus = chipRating4 != null
-                            && chipRating4.getCurrentTextColor() == 0xFFFF6B00;
-                    boolean fastDelivery = chipFastDelivery != null
-                            && chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00;
-                    boolean offers = chipOffers != null
-                            && chipOffers.getCurrentTextColor() == 0xFFFF6B00;
-                    boolean pureVeg = chipPureVeg != null
-                            && chipPureVeg.getCurrentTextColor() == 0xFFFF6B00;
+                boolean rating4Plus = chipRating4 != null && chipRating4.getCurrentTextColor() == 0xFFFF6B00;
+                boolean fastDelivery = chipFastDelivery != null && chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00;
+                boolean offers = chipOffers != null && chipOffers.getCurrentTextColor() == 0xFFFF6B00;
+                boolean pureVeg = chipPureVeg != null && chipPureVeg.getCurrentTextColor() == 0xFFFF6B00;
 
-                    String sortBy = "Relevance";
-                    if (chipRating != null && chipRating.getCurrentTextColor() == 0xFFFF6B00) {
-                        sortBy = "Rating";
-                    } else if (chipDeliveryTime != null
-                            && chipDeliveryTime.getCurrentTextColor() == 0xFFFF6B00) {
-                        sortBy = "Delivery Time";
-                    }
-
-                    Intent intent = new Intent(requireContext(), FilterResultsActivity.class);
-                    intent.putExtra("rating4Plus", rating4Plus);
-                    intent.putExtra("fastDelivery", fastDelivery);
-                    intent.putExtra("offers", offers);
-                    intent.putExtra("pureVeg", pureVeg);
-                    intent.putExtra("sortBy", sortBy);
-                    startActivity(intent);
-
-                    bottomSheetDialog.dismiss();
-                } catch (Exception ex) {
-                    Toast.makeText(requireContext(),
-                            "Cannot open results: " + ex.getMessage(),
-                            Toast.LENGTH_LONG).show();
-                    bottomSheetDialog.dismiss();
+                String sortBy = "Relevance";
+                if (chipRatingHigh != null && chipRatingHigh.getCurrentTextColor() == 0xFFFF6B00) {
+                    sortBy = "Rating High to Low";
+                } else if (chipRatingLow != null && chipRatingLow.getCurrentTextColor() == 0xFFFF6B00) {
+                    sortBy = "Rating Low to High";
+                } else if (chipRecent != null && chipRecent.getCurrentTextColor() == 0xFFFF6B00) {
+                    sortBy = "Recent";
+                } else if (chipDeliveryTime != null && chipDeliveryTime.getCurrentTextColor() == 0xFFFF6B00) {
+                    sortBy = "Delivery Time";
                 }
+
+                Intent intent = new Intent(requireContext(), FilterResultsActivity.class);
+                intent.putExtra("rating4Plus", rating4Plus);
+                intent.putExtra("fastDelivery", fastDelivery);
+                intent.putExtra("offers", offers);
+                intent.putExtra("pureVeg", pureVeg);
+                intent.putExtra("sortBy", sortBy);
+                startActivity(intent);
+
+                bottomSheetDialog.dismiss();
             });
 
         } catch (Exception e) {
-            Toast.makeText(requireContext(),
-                    "Filter Error: " + e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), "Filter Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }

@@ -16,18 +16,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
 
-        // Back button
         ImageButton backButton = findViewById(R.id.backButton);
         if (backButton != null) {
             backButton.setOnClickListener(v -> finish());
         }
 
-        // Toolbar title
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
-        if (toolbarTitle != null) {
-            toolbarTitle.setText("Details");
-        }
-
         ImageView productImage = findViewById(R.id.productImage);
         TextView productName = findViewById(R.id.productName);
         TextView productPrice = findViewById(R.id.productPrice);
@@ -41,7 +35,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         if (name != null) {
             productName.setText(name);
-            // Optional: also set toolbar title to product name
             if (toolbarTitle != null) {
                 toolbarTitle.setText(name);
             }
@@ -50,8 +43,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         if (description != null) productDescription.setText(description);
         if (imageResource != 0) productImage.setImageResource(imageResource);
 
-        addToCartButton.setOnClickListener(v ->
-                Toast.makeText(this, name + " added to cart", Toast.LENGTH_SHORT).show()
-        );
+        addToCartButton.setOnClickListener(v -> {
+            CartManager.getInstance().addToCart(name, price, imageResource);
+            Toast.makeText(this, name + " added to cart", Toast.LENGTH_SHORT).show();
+        });
     }
 }

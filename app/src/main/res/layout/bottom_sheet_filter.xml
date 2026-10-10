@@ -37,6 +37,7 @@
         android:textSize="13sp"
         android:textStyle="bold" />
 
+    <!-- Sort By Row 1 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,42 +48,87 @@
 
         <TextView
             android:id="@+id/chipRelevance"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
             android:text="Relevance"
             android:textColor="#FF6B00"
             android:textSize="13sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/chipRating"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:id="@+id/chipRatingHigh"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
-            android:text="Rating"
+            android:text="High to Low"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Sort By Row 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chipRatingLow"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/category_button_background"
+            android:gravity="center"
+            android:text="Low to High"
             android:textColor="#333333"
             android:textSize="13sp" />
 
         <TextView
-            android:id="@+id/chipDeliveryTime"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:id="@+id/chipRecent"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
+            android:text="Recent"
+            android:textColor="#333333"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Sort By Row 3 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chipDeliveryTime"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/category_button_background"
+            android:gravity="center"
             android:text="Delivery Time"
             android:textColor="#333333"
             android:textSize="13sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <!-- Quick Filters -->
@@ -90,12 +136,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="24dp"
         android:text="Quick Filters"
         android:textColor="#666666"
         android:textSize="13sp"
         android:textStyle="bold" />
 
+    <!-- Quick Filters Row 1 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,30 +153,29 @@
 
         <TextView
             android:id="@+id/chipRating4"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
             android:text="Rating 4.0+"
             android:textColor="#333333"
             android:textSize="13sp" />
 
         <TextView
             android:id="@+id/chipFastDelivery"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
             android:text="Fast Delivery"
             android:textColor="#333333"
             android:textSize="13sp" />
     </LinearLayout>
 
+    <!-- Quick Filters Row 2 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,25 +186,23 @@
 
         <TextView
             android:id="@+id/chipOffers"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
             android:text="Offers"
             android:textColor="#333333"
             android:textSize="13sp" />
 
         <TextView
             android:id="@+id/chipPureVeg"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
+            android:layout_weight="1"
             android:background="@drawable/category_button_background"
             android:gravity="center"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
             android:text="Pure Veg"
             android:textColor="#333333"
             android:textSize="13sp" />

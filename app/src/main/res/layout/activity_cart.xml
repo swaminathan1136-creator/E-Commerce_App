@@ -20,174 +20,12 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Cart Item 1 - Pizza -->
+            <!-- Dynamic Cart Items Container -->
             <LinearLayout
+                android:id="@+id/cartItemsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/food_card_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/pizza"
-                    android:contentDescription="Food" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Margherita Pizza"
-                        android:textColor="#1A1A1A"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="₹299"
-                        android:textColor="#FF6B00"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Quantity Controls -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/quantity_background"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <TextView
-                        android:id="@+id/pizzaMinusButton"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:gravity="center"
-                        android:text="−"
-                        android:textColor="#FF6B00"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/pizzaQuantityText"
-                        android:layout_width="36dp"
-                        android:layout_height="34dp"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="#1A1A1A"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/pizzaPlusButton"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:gravity="center"
-                        android:text="+"
-                        android:textColor="#FF6B00"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Cart Item 2 - Biryani -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/food_card_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/biryani"
-                    android:contentDescription="Food" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Veg Biryani"
-                        android:textColor="#1A1A1A"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="₹249"
-                        android:textColor="#FF6B00"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- Quantity Controls -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/quantity_background"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="4dp">
-
-                    <TextView
-                        android:id="@+id/biryaniMinusButton"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:gravity="center"
-                        android:text="−"
-                        android:textColor="#FF6B00"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/biryaniQuantityText"
-                        android:layout_width="36dp"
-                        android:layout_height="34dp"
-                        android:gravity="center"
-                        android:text="1"
-                        android:textColor="#1A1A1A"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/biryaniPlusButton"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:gravity="center"
-                        android:text="+"
-                        android:textColor="#FF6B00"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
+                android:orientation="vertical" />
 
             <!-- Bill Summary -->
             <LinearLayout
@@ -224,7 +62,7 @@
                         android:id="@+id/itemTotalText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹548"
+                        android:text="₹0"
                         android:textColor="#1A1A1A"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -276,7 +114,7 @@
                         android:id="@+id/totalText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="₹578"
+                        android:text="₹30"
                         android:textColor="#FF6B00"
                         android:textSize="18sp"
                         android:textStyle="bold" />

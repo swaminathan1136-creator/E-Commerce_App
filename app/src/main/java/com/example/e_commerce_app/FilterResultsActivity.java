@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FilterResultsActivity extends AppCompatActivity {
@@ -44,11 +45,16 @@ public class FilterResultsActivity extends AppCompatActivity {
         List<FoodItem> allItems = getAllFoodItems();
         List<FoodItem> filteredList = filterItems(allItems, rating4Plus, fastDelivery, offers, pureVeg);
 
-        // Simple sorting
-        if (sortBy.equals("Rating")) {
+        // ========== Sorting ==========
+        if (sortBy.equals("Rating High to Low")) {
             filteredList.sort((a, b) -> Float.compare(b.rating, a.rating));
-        } else if (sortBy.equals("Delivery Time")) {
+        } else if (sortBy.equals("Rating Low to High")) {
+            filteredList.sort((a, b) -> Float.compare(a.rating, b.rating));
+        } else if (sortBy.equals("Delivery Time") || fastDelivery) {
+            // Sort by delivery time ascending (Fastest first)
             filteredList.sort((a, b) -> Integer.compare(a.deliveryTime, b.deliveryTime));
+        } else if (sortBy.equals("Recent")) {
+            Collections.reverse(filteredList);
         }
 
         FilterResultsAdapter adapter = new FilterResultsAdapter(filteredList);

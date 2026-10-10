@@ -1,26 +1,25 @@
 package com.example.e_commerce_app;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class CartActivity extends AppCompatActivity {
 
-    private int pizzaQuantity = 1;
-    private int biryaniQuantity = 1;
-
-    private final int pizzaPrice = 299;
-    private final int biryaniPrice = 249;
-    private final int deliveryFee = 30;
-
-    private TextView pizzaQuantityText;
-    private TextView biryaniQuantityText;
+    private LinearLayout cartItemsContainer;
     private TextView itemTotalText;
     private TextView totalText;
+    private final int deliveryFee = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,75 +36,88 @@ public class CartActivity extends AppCompatActivity {
             toolbarTitle.setText("My Cart");
         }
 
-        Button placeOrderButton = findViewById(R.id.placeOrderButton);
-        if (placeOrderButton != null) {
-            placeOrderButton.setOnClickListener(v ->
-                    Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show()
-            );
-        }
-
-        TextView pizzaMinusButton = findViewById(R.id.pizzaMinusButton);
-        TextView pizzaPlusButton = findViewById(R.id.pizzaPlusButton);
-        pizzaQuantityText = findViewById(R.id.pizzaQuantityText);
-
-        TextView biryaniMinusButton = findViewById(R.id.biryaniMinusButton);
-        TextView biryaniPlusButton = findViewById(R.id.biryaniPlusButton);
-        biryaniQuantityText = findViewById(R.id.biryaniQuantityText);
-
+        cartItemsContainer = findViewById(R.id.cartItemsContainer);
         itemTotalText = findViewById(R.id.itemTotalText);
         totalText = findViewById(R.id.totalText);
 
-        if (pizzaPlusButton != null) {
-            pizzaPlusButton.setOnClickListener(v -> {
-                pizzaQuantity++;
-                updateCart();
-            });
-        }
-
-        if (pizzaMinusButton != null) {
-            pizzaMinusButton.setOnClickListener(v -> {
-                if (pizzaQuantity > 1) {
-                    pizzaQuantity--;
-                    updateCart();
+        Button placeOrderButton = findViewById(R.id.placeOrderButton);
+        if (placeOrderButton != null) {
+            placeOrderButton.setOnClickListener(v -> {
+                if (CartManager.getInstance().getCartItems().isEmpty()) {
+                    Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show();
+                    CartManager.getInstance().clearCart();
+                    finish();
                 }
             });
         }
 
-        if (biryaniPlusButton != null) {
-            biryaniPlusButton.setOnClickListener(v -> {
-                biryaniQuantity++;
-                updateCart();
-            });
-        }
-
-        if (biryaniMinusButton != null) {
-            biryaniMinusButton.setOnClickListener(v -> {
-                if (biryaniQuantity > 1) {
-                    biryaniQuantity--;
-                    updateCart();
-                }
-            });
-        }
-
-        updateCart();
+        loadCartItems();
     }
 
-    private void updateCart() {
-        if (pizzaQuantityText != null) {
-            pizzaQuantityText.setText(String.valueOf(pizzaQuantity));
-        }
-        if (biryaniQuantityText != null) {
-            biryaniQuantityText.setText(String.valueOf(biryaniQuantity));
+    private void loadCartItems() {
+        cartItemsContainer.removeAllViews();
+        List<CartItem> cartItems = CartManager.getInstance().getCartItems();
+
+        if (cartItems.isEmpty()) {
+            TextView emptyText = new TextView(this);
+            emptyText.setText("Your cart is empty");
+            emptyText.setTextSize(16);
+            emptyText.setTextColor(0xFF888888);
+            emptyText.setPadding(0, 40, 0, 40);
+            cartItemsContainer.addView(emptyText);
+            updateBill(0);
+            return;
         }
 
-        int itemTotal = (pizzaPrice * pizzaQuantity) + (biryaniPrice * biryaniQuantity);
-        int total = itemTotal + deliveryFee;
+        int itemTotal = 0;
 
+        for (CartItem item : cartItems) {
+            View itemView = LayoutInflater.from(this).inflate(R.layout.item_cart, cartItemsContainer, false);
+
+            ImageView foodImage = itemView.findViewById(R.id.cartFoodImage);
+            TextView foodName = itemView.findViewById(R.id.cartFoodName);
+            TextView foodPrice = itemView.findViewById(R.id.cartFoodPrice);
+            TextView quantityText = itemView.findViewById(R.id.cartQuantityText);
+            TextView minusButton = itemView.findViewById(R.id.cartMinusButton);
+            TextView plusButton = itemView.findViewById(R.id.cartPlusButton);
+
+            foodImage.setImageResource(item.imageResource);
+            foodName.setText(item.name);
+            foodPrice.setText(item.price);
+            quantityText.setText(String.valueOf(item.quantity));
+
+            // Calculate price
+            int priceValue = Integer.parseInt(item.price.replace("₹", "").trim());
+            itemTotal += priceValue * item.quantity;
+
+            plusButton.setOnClickListener(v -> {
+                CartManager.getInstance().updateQuantity(item.name, item.quantity + 1);
+                loadCartItems();
+            });
+
+            minusButton.setOnClickListener(v -> {
+                if (item.quantity > 1) {
+                    CartManager.getInstance().updateQuantity(item.name, item.quantity - 1);
+                } else {
+                    CartManager.getInstance().removeFromCart(item.name);
+                }
+                loadCartItems();
+            });
+
+            cartItemsContainer.addView(itemView);
+        }
+
+        updateBill(itemTotal);
+    }
+
+    private void updateBill(int itemTotal) {
         if (itemTotalText != null) {
             itemTotalText.setText("₹" + itemTotal);
         }
         if (totalText != null) {
-            totalText.setText("₹" + total);
+            totalText.setText("₹" + (itemTotal + deliveryFee));
         }
     }
 }
