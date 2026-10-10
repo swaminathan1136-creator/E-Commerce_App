@@ -116,7 +116,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- Bottom Bar with Add to Cart -->
+        <!-- Bottom Bar with Favorite + Add to Cart -->
         <LinearLayout
             android:id="@+id/bottomBar"
             android:layout_width="match_parent"
@@ -124,13 +124,27 @@
             android:layout_alignParentBottom="true"
             android:background="#FFFFFF"
             android:elevation="8dp"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
+            <!-- Favorite Button -->
+            <ImageButton
+                android:id="@+id/favoriteButton"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/category_button_background"
+                android:src="@drawable/ic_favorite"
+                android:contentDescription="Add to Favorites"
+                android:padding="12dp" />
+
+            <!-- Add to Cart Button -->
             <Button
                 android:id="@+id/addToCartButton"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="56dp"
+                android:layout_weight="1"
                 android:backgroundTint="#FF6B00"
                 android:text="Add to Cart"
                 android:textAllCaps="false"

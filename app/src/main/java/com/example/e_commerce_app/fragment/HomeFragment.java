@@ -49,17 +49,10 @@ public class HomeFragment extends Fragment {
         View cartContainer = view.findViewById(R.id.cartContainer);
         cartBadge = view.findViewById(R.id.cartBadge);
 
-        if (locationContainer != null) {
-            locationContainer.setVisibility(View.VISIBLE);
-        }
-        if (cartContainer != null) {
-            cartContainer.setVisibility(View.VISIBLE);
-        }
-        if (toolbarTitle != null) {
-            toolbarTitle.setVisibility(View.GONE);
-        }
+        if (locationContainer != null) locationContainer.setVisibility(View.VISIBLE);
+        if (cartContainer != null) cartContainer.setVisibility(View.VISIBLE);
+        if (toolbarTitle != null) toolbarTitle.setVisibility(View.GONE);
 
-        // Update cart badge
         updateCartBadge();
 
         if (locationContainer != null) {
@@ -85,6 +78,28 @@ public class HomeFragment extends Fragment {
         ImageView product1 = view.findViewById(R.id.product1);
         ImageView product2 = view.findViewById(R.id.product2);
 
+        // ==================== SEE ALL BUTTONS ====================
+        TextView seeAllCategories = view.findViewById(R.id.seeAllCategories);
+        TextView seeAllPicks = view.findViewById(R.id.seeAllPicks);
+        TextView seeAllRestaurants = view.findViewById(R.id.seeAllRestaurants);
+        TextView seeAllBestSellers = view.findViewById(R.id.seeAllBestSellers);
+
+        if (seeAllCategories != null) {
+            seeAllCategories.setOnClickListener(v -> openCategory("All"));
+        }
+        if (seeAllPicks != null) {
+            seeAllPicks.setOnClickListener(v -> openCategory("Picks For You"));
+        }
+        if (seeAllRestaurants != null) {
+            seeAllRestaurants.setOnClickListener(v ->
+                    startActivity(new Intent(requireContext(), RestaurantsActivity.class))
+            );
+        }
+        if (seeAllBestSellers != null) {
+            seeAllBestSellers.setOnClickListener(v -> openCategory("Best Sellers"));
+        }
+
+        // ==================== SEARCH ====================
         if (searchBar != null) {
             searchBar.setFocusable(false);
             searchBar.setClickable(true);
@@ -201,14 +216,12 @@ public class HomeFragment extends Fragment {
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
 
-            // Sort By
             final TextView chipRelevance = bottomSheetView.findViewById(R.id.chipRelevance);
             final TextView chipRatingHigh = bottomSheetView.findViewById(R.id.chipRatingHigh);
             final TextView chipRatingLow = bottomSheetView.findViewById(R.id.chipRatingLow);
             final TextView chipRecent = bottomSheetView.findViewById(R.id.chipRecent);
             final TextView chipDeliveryTime = bottomSheetView.findViewById(R.id.chipDeliveryTime);
 
-            // Quick Filters
             final TextView chipRating4 = bottomSheetView.findViewById(R.id.chipRating4);
             final TextView chipFastDelivery = bottomSheetView.findViewById(R.id.chipFastDelivery);
             final TextView chipOffers = bottomSheetView.findViewById(R.id.chipOffers);
@@ -222,21 +235,17 @@ public class HomeFragment extends Fragment {
                 return;
             }
 
-            // ========== SORT BY ==========
             View.OnClickListener sortListener = v -> {
                 TextView clicked = (TextView) v;
-
                 if (clicked.getCurrentTextColor() == 0xFFFF6B00) {
                     clicked.setTextColor(0xFF333333);
                     return;
                 }
-
                 if (chipRelevance != null) chipRelevance.setTextColor(0xFF333333);
                 if (chipRatingHigh != null) chipRatingHigh.setTextColor(0xFF333333);
                 if (chipRatingLow != null) chipRatingLow.setTextColor(0xFF333333);
                 if (chipRecent != null) chipRecent.setTextColor(0xFF333333);
                 if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
-
                 clicked.setTextColor(0xFFFF6B00);
             };
 
@@ -246,64 +255,40 @@ public class HomeFragment extends Fragment {
             if (chipRecent != null) chipRecent.setOnClickListener(sortListener);
             if (chipDeliveryTime != null) chipDeliveryTime.setOnClickListener(sortListener);
 
-            // ========== QUICK FILTERS ==========
             if (chipRating4 != null) {
                 chipRating4.setOnClickListener(v -> {
-                    if (chipRating4.getCurrentTextColor() == 0xFFFF6B00) {
-                        chipRating4.setTextColor(0xFF333333);
-                    } else {
-                        chipRating4.setTextColor(0xFFFF6B00);
-                    }
+                    chipRating4.setTextColor(chipRating4.getCurrentTextColor() == 0xFFFF6B00 ? 0xFF333333 : 0xFFFF6B00);
                 });
             }
-
             if (chipFastDelivery != null) {
                 chipFastDelivery.setOnClickListener(v -> {
-                    if (chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00) {
-                        chipFastDelivery.setTextColor(0xFF333333);
-                    } else {
-                        chipFastDelivery.setTextColor(0xFFFF6B00);
-                    }
+                    chipFastDelivery.setTextColor(chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00 ? 0xFF333333 : 0xFFFF6B00);
                 });
             }
-
             if (chipOffers != null) {
                 chipOffers.setOnClickListener(v -> {
-                    if (chipOffers.getCurrentTextColor() == 0xFFFF6B00) {
-                        chipOffers.setTextColor(0xFF333333);
-                    } else {
-                        chipOffers.setTextColor(0xFFFF6B00);
-                    }
+                    chipOffers.setTextColor(chipOffers.getCurrentTextColor() == 0xFFFF6B00 ? 0xFF333333 : 0xFFFF6B00);
                 });
             }
-
             if (chipPureVeg != null) {
                 chipPureVeg.setOnClickListener(v -> {
-                    if (chipPureVeg.getCurrentTextColor() == 0xFFFF6B00) {
-                        chipPureVeg.setTextColor(0xFF333333);
-                    } else {
-                        chipPureVeg.setTextColor(0xFFFF6B00);
-                    }
+                    chipPureVeg.setTextColor(chipPureVeg.getCurrentTextColor() == 0xFFFF6B00 ? 0xFF333333 : 0xFFFF6B00);
                 });
             }
 
-            // ========== CLEAR ALL ==========
             btnClearAll.setOnClickListener(v -> {
                 if (chipRelevance != null) chipRelevance.setTextColor(0xFF333333);
                 if (chipRatingHigh != null) chipRatingHigh.setTextColor(0xFF333333);
                 if (chipRatingLow != null) chipRatingLow.setTextColor(0xFF333333);
                 if (chipRecent != null) chipRecent.setTextColor(0xFF333333);
                 if (chipDeliveryTime != null) chipDeliveryTime.setTextColor(0xFF333333);
-
                 if (chipRating4 != null) chipRating4.setTextColor(0xFF333333);
                 if (chipFastDelivery != null) chipFastDelivery.setTextColor(0xFF333333);
                 if (chipOffers != null) chipOffers.setTextColor(0xFF333333);
                 if (chipPureVeg != null) chipPureVeg.setTextColor(0xFF333333);
-
                 Toast.makeText(requireContext(), "Filters cleared", Toast.LENGTH_SHORT).show();
             });
 
-            // ========== APPLY ==========
             btnApply.setOnClickListener(v -> {
                 boolean rating4Plus = chipRating4 != null && chipRating4.getCurrentTextColor() == 0xFFFF6B00;
                 boolean fastDelivery = chipFastDelivery != null && chipFastDelivery.getCurrentTextColor() == 0xFFFF6B00;
@@ -328,7 +313,6 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("pureVeg", pureVeg);
                 intent.putExtra("sortBy", sortBy);
                 startActivity(intent);
-
                 bottomSheetDialog.dismiss();
             });
 
