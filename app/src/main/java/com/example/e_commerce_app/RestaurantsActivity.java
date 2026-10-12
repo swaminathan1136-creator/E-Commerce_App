@@ -3,15 +3,27 @@ package com.example.e_commerce_app;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantsActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RestaurantAdapter adapter;
+    private List<RestaurantItem> restaurantList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +42,50 @@ public class RestaurantsActivity extends AppCompatActivity {
             toolbarTitle.setText("Restaurants");
         }
 
-        RecyclerView restaurantRecyclerView = findViewById(R.id.restaurantRecyclerView);
-        restaurantRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.restaurantsRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<RestaurantItem> restaurantList = new ArrayList<>();
+        adapter = new RestaurantAdapter(restaurantList);
+        recyclerView.setAdapter(adapter);
 
-        restaurantList.add(new RestaurantItem("Pizza Palace", "Italian • Pizza", "★ 4.6", "20–25 min", R.drawable.pizza));
-        restaurantList.add(new RestaurantItem("Spice Garden", "Indian • Biryani", "★ 4.5", "25–30 min", R.drawable.spice_garden));
-        restaurantList.add(new RestaurantItem("Urban Tadka", "North Indian", "★ 4.4", "25–35 min", R.drawable.urban_tadka));
-        restaurantList.add(new RestaurantItem("Burger Junction", "Fast Food • Burgers", "★ 4.3", "20–25 min", R.drawable.burger));
-        restaurantList.add(new RestaurantItem("Curry House", "Indian • Curry", "★ 4.5", "30–35 min", R.drawable.curry_house));
-        restaurantList.add(new RestaurantItem("Food Studio", "Multi Cuisine", "★ 4.7", "20–30 min", R.drawable.food_studio));
-        restaurantList.add(new RestaurantItem("Masala Junction", "Vegetarian • Indian", "★ 4.4", "25–30 min", R.drawable.masala_junction));
-        restaurantList.add(new RestaurantItem("Cafe Aroma", "Cafe • Snacks", "★ 4.2", "15–25 min", R.drawable.cafe_aroma));
-        restaurantList.add(new RestaurantItem("Royal Biryani", "Biryani • Indian", "★ 4.6", "30–35 min", R.drawable.biryani));
-        restaurantList.add(new RestaurantItem("Tandoori Tales", "Tandoor • Indian", "★ 4.5", "25–35 min", R.drawable.tandoori_tales));
-        restaurantList.add(new RestaurantItem("Crust & Cheese", "Pizza • Italian", "★ 4.4", "20–25 min", R.drawable.crust_cheese));
-        restaurantList.add(new RestaurantItem("Green Bowl", "Healthy • Vegetarian", "★ 4.3", "20–30 min", R.drawable.green_bowl));
-        restaurantList.add(new RestaurantItem("Spicy Street", "Street Food • Indian", "★ 4.2", "15–25 min", R.drawable.spicy_street));
-        restaurantList.add(new RestaurantItem("Food Republic", "Multi Cuisine", "★ 4.6", "25–30 min", R.drawable.food_republic));
-        restaurantList.add(new RestaurantItem("Flavour Hub", "Indian • Chinese", "★ 4.5", "20–30 min", R.drawable.flavour_hub));
+        fetchRestaurants();
+    }
 
-        RestaurantAdapter adapter = new RestaurantAdapter(restaurantList);
-        restaurantRecyclerView.setAdapter(adapter);
+    private void fetchRestaurants() {
+        String url = ApiClient.BASE_URL + "get_restaurants";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                response -> {
+                    try {
+                        restaurantList.clear();
+
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject obj = response.getJSONObject(i);
+
+                            String name = obj.getString("name");
+                            String rating = obj.getString("rating");
+                            String deliveryTime = obj.getString("delivery_time") + " min";
+                            String offerText = obj.isNull("offer_text") ? "" : obj.getString("offer_text");
+
+                            // You can later map image from database
+                            int imageRes = R.drawable.pizza;
+
+                            restaurantList.add(new RestaurantItem(name, rating, deliveryTime, imageRes, offerText));
+                        }
+
+                        adapter.notifyDataSetChanged();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(this, "Parsing error", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    Toast.makeText(this, "Error: " + error.toString(), Toast.LENGTH_LONG).show();
+                });
+
+        queue.add(request);
     }
 }
