@@ -31,11 +31,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void onBindViewHolder(@NonNull RestaurantViewHolder holder, int position) {
         RestaurantItem item = restaurantList.get(position);
 
-        holder.restaurantName.setText(item.name);
-        holder.restaurantCuisine.setText(item.cuisine);
-        holder.restaurantRating.setText(item.rating);
-        holder.restaurantDeliveryTime.setText(item.deliveryTime);
-        holder.restaurantImage.setImageResource(item.imageResource);
+        holder.restaurantName.setText(item.getName());
+        //holder.restaurantCuisine.setText(item.cuisine);
+        holder.restaurantRating.setText(item.getRating());
+        holder.restaurantDeliveryTime.setText(item.getDeliveryTime());
+        holder.restaurantImage.setImageResource(item.getImageRes());
     }
 
     @Override

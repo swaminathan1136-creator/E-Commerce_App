@@ -42,7 +42,7 @@ public class RestaurantsActivity extends AppCompatActivity {
             toolbarTitle.setText("Restaurants");
         }
 
-        recyclerView = findViewById(R.id.restaurantsRecyclerView);
+        recyclerView = findViewById(R.id.restaurantRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         adapter = new RestaurantAdapter(restaurantList);

@@ -1,24 +1,45 @@
+
 package com.example.e_commerce_app;
 
 public class RestaurantItem {
 
-    String name;
-    String cuisine;
-    String rating;
-    String deliveryTime;
-    int imageResource;
+    private String name;
+    private String rating;
+    private String deliveryTime;
+    private int imageRes;
+    private String offerText;
 
     public RestaurantItem(
             String name,
-            String cuisine,
             String rating,
             String deliveryTime,
-            int imageResource
-    ) {
+            int imageRes,
+            String offerText) {
+
         this.name = name;
-        this.cuisine = cuisine;
         this.rating = rating;
         this.deliveryTime = deliveryTime;
-        this.imageResource = imageResource;
+        this.imageRes = imageRes;
+        this.offerText = offerText;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public int getImageRes() {
+        return imageRes;
+    }
+
+    public String getOfferText() {
+        return offerText;
     }
 }
