@@ -17,14 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.e_commerce_app.CartActivity;
-import com.example.e_commerce_app.CartManager;
-import com.example.e_commerce_app.CategoryActivity;
-import com.example.e_commerce_app.FilterResultsActivity;
-import com.example.e_commerce_app.ProductDetailActivity;
+import com.example.e_commerce_app.Activity.CartActivity;
+import com.example.e_commerce_app.Manager.CartManager;
+import com.example.e_commerce_app.Activity.CategoryActivity;
+import com.example.e_commerce_app.Activity.FilterResultsActivity;
+import com.example.e_commerce_app.Activity.ProductDetailActivity;
 import com.example.e_commerce_app.R;
-import com.example.e_commerce_app.RestaurantsActivity;
-import com.example.e_commerce_app.SearchActivity;
+import com.example.e_commerce_app.Activity.RestaurantsActivity;
+import com.example.e_commerce_app.Activity.SearchActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class HomeFragment extends Fragment {

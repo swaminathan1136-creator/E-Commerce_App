@@ -1,4 +1,4 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -7,6 +7,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.e_commerce_app.Adapter.OrderAdapter;
+import com.example.e_commerce_app.Item.OrderItem;
+import com.example.e_commerce_app.R;
 
 import java.util.ArrayList;
 import java.util.List;

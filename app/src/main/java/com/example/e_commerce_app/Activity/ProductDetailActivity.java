@@ -1,4 +1,4 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.e_commerce_app.Manager.CartManager;
+import com.example.e_commerce_app.Manager.FavoritesManager;
+import com.example.e_commerce_app.R;
 
 public class ProductDetailActivity extends AppCompatActivity {
 

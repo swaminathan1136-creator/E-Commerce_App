@@ -19,7 +19,7 @@
 
         <!-- Launcher -->
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,56 +29,56 @@
 
         <!-- Authentication -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".Activity.SignUpActivity"
             android:exported="false" />
 
         <!-- Main screens -->
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".CategoryActivity"
+            android:name=".Activity.CategoryActivity"
             android:exported="false" />
         <activity
-            android:name=".RestaurantsActivity"
+            android:name=".Activity.RestaurantsActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".Activity.SearchActivity"
             android:exported="false" />
 
         <!-- Shopping -->
         <activity
-            android:name=".CartActivity"
+            android:name=".Activity.CartActivity"
             android:exported="false" />
         <activity
-            android:name=".FavoritesActivity"
+            android:name=".Activity.FavoritesActivity"
             android:exported="false" />
         <activity
-            android:name=".ProductDetailActivity"
+            android:name=".Activity.ProductDetailActivity"
             android:exported="false" />
 
         <!-- Orders -->
         <activity
-            android:name=".OrdersActivity"
+            android:name=".Activity.OrdersActivity"
             android:exported="false" />
         <activity
-            android:name=".OrderHistoryActivity"
+            android:name=".Activity.OrderHistoryActivity"
             android:exported="false" />
 
         <!-- Offers and filters -->
         <activity
-            android:name=".OffersActivity"
+            android:name=".Activity.OffersActivity"
             android:exported="false" />
         <activity
-            android:name=".FilterResultsActivity"
+            android:name=".Activity.FilterResultsActivity"
             android:exported="false" />
 
         <!-- Profile -->
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Activity.ProfileActivity"
             android:exported="false" />
 
     </application>

@@ -1,4 +1,4 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -6,12 +6,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CategoryActivity extends AppCompatActivity {
+import com.example.e_commerce_app.R;
+
+public class FavoritesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
+        setContentView(R.layout.activity_favorites);
 
         // Back button
         ImageButton backButton = findViewById(R.id.backButton);
@@ -19,15 +21,10 @@ public class CategoryActivity extends AppCompatActivity {
             backButton.setOnClickListener(v -> finish());
         }
 
-        // Toolbar title (from custom_toolbar)
-        String category = getIntent().getStringExtra("category");
-        if (category == null || category.isEmpty()) {
-            category = "All Food";
-        }
-
+        // Toolbar title
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         if (toolbarTitle != null) {
-            toolbarTitle.setText(category);
+            toolbarTitle.setText("My Favorites");
         }
     }
 }

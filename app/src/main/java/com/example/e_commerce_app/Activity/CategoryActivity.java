@@ -1,4 +1,4 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.os.Bundle;
 import android.widget.ImageButton;
@@ -6,12 +6,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class OffersActivity extends AppCompatActivity {
+import com.example.e_commerce_app.R;
+
+public class CategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_offers);
+        setContentView(R.layout.activity_category);
 
         // Back button
         ImageButton backButton = findViewById(R.id.backButton);
@@ -19,10 +21,15 @@ public class OffersActivity extends AppCompatActivity {
             backButton.setOnClickListener(v -> finish());
         }
 
-        // Toolbar title
+        // Toolbar title (from custom_toolbar)
+        String category = getIntent().getStringExtra("category");
+        if (category == null || category.isEmpty()) {
+            category = "All Food";
+        }
+
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
         if (toolbarTitle != null) {
-            toolbarTitle.setText("Offers & Deals");
+            toolbarTitle.setText(category);
         }
     }
 }

@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.e_commerce_app.FavoriteItem;
-import com.example.e_commerce_app.FavoritesManager;
+import com.example.e_commerce_app.Item.FavoriteItem;
+import com.example.e_commerce_app.Manager.FavoritesManager;
 import com.example.e_commerce_app.R;
 
 import java.util.List;

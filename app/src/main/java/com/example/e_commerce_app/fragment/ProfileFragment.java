@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,8 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
-import com.example.e_commerce_app.LoginActivity;
-import com.example.e_commerce_app.OrderHistoryActivity;
+import com.example.e_commerce_app.Activity.LoginActivity;
+import com.example.e_commerce_app.Activity.OrderHistoryActivity;
 import com.example.e_commerce_app.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.switchmaterial.SwitchMaterial;

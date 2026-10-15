@@ -1,9 +1,11 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.e_commerce_app.R;
 
 public class SplashActivity extends AppCompatActivity {
 

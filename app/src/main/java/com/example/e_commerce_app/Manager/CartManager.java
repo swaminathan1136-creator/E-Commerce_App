@@ -1,4 +1,6 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Manager;
+
+import com.example.e_commerce_app.Item.CartItem;
 
 import java.util.ArrayList;
 import java.util.List;

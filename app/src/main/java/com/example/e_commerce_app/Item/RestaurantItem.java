@@ -1,5 +1,5 @@
 
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Item;
 
 public class RestaurantItem {
 

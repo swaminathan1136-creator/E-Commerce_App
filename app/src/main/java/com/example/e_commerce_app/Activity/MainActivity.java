@@ -1,10 +1,11 @@
-package com.example.e_commerce_app;
+package com.example.e_commerce_app.Activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.e_commerce_app.R;
 import com.example.e_commerce_app.fragment.FavoritesFragment;
 import com.example.e_commerce_app.fragment.HomeFragment;
 import com.example.e_commerce_app.fragment.OffersFragment;
